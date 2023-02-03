@@ -83,6 +83,11 @@ fetch(`http://www.omdbapi.com/?apikey=92a2e38f&type=movie&y=${currentYear}`)
   });
 }
 
+document.querySelector("#search-bar")
+.addEventListener("click", function () {
+  data.search();
+});
+
 
 
 // const movieContainer = document.querySelector("#movie-container");

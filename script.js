@@ -81,12 +81,12 @@ fetch(`http://www.omdbapi.com/?apikey=92a2e38f&type=movie&y=${currentYear}`)
       });
     }
   });
-}
+};
 
-document.querySelector("#search-bar")
+document.querySelector("#search-button")
 .addEventListener("click", function () {
-  data.search();
-});
+  fetch(`http://www.omdbapi.com/?apikey=92a2e38f&i=${imdbID}&plot=full`)
+})
 
 
 

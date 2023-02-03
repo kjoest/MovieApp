@@ -6,7 +6,9 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" 
+  integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" 
+  crossorigin="anonymous">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -36,18 +38,22 @@
     </form>
 
     <div id="movie-container">
-      <img id="movie-poster" src="" alt="">
-      <h2 id="movie-title"></h2>
-      <p id="movie-rated"></p>
-      <p id="movie-genre"></p>
+      <div id="movie-list">
+        <img id="movie-poster" src="" alt="">
+        <h2 id="movie-title"></h2>
+        <p id="movie-rated"></p>
+        <p id="movie-genre"></p>
+      </div>
     </div>
 
-
-
-
-
-
-
+    <div class="icons">
+      <button id="previous-button">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <button id="next-button">
+        <i class="fas fa-arrow-right"></i>
+      </button>
+    </div>
   </main>
   <!-- Optional JavaScript -->
   <script src="script.js"></script>

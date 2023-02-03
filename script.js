@@ -52,41 +52,81 @@ searchForm.addEventListener('submit', event => {
 let today = new Date();
 let currentYear = today.getFullYear();
 
+let currentPage = 1;
+
 window.onload = function () {
-fetch(`http://www.omdbapi.com/?apikey=92a2e38f&type=movie&y=${currentYear}`)
-  .then(response => response.json())
-  .then(movieData => {
-    if (movieData.Response === "True") {
-      const movies = movieData.Search;
-
-      movies.forEach(movieData => {
-        const imdbID = movieData.imdbID;
-        fetch(`http://www.omdbapi.com/?apikey=92a2e38f&i=${imdbID}&plot=full`)
-          .then(response => response.json())
-          .then(movieData => {
-            const posterUrl = movieData.Poster !== "N/A" ? movieData.Poster : "";
-            const title = movieData.Title;
-            const movieRated = movieData.Rated;
-            const genre = movieData.Genre;
-
-            if (posterUrl === "N/A") {
-              document.querySelector('#movie-poster').src = defaultImage;
-            } else {
-              document.querySelector('#movie-poster').src = posterUrl;
-            }
-            document.querySelector('#movie-title').innerText = title;
-            document.querySelector('#movie-rated').innerText = movieRated;
-            document.querySelector('#movie-genre').innerText = genre;
-          });
-      });
-    }
-  });
+  fetchMovies(currentPage);
 };
 
-document.querySelector("#search-button")
-.addEventListener("click", function () {
-  fetch(`http://www.omdbapi.com/?apikey=92a2e38f&i=${imdbID}&plot=full`)
-})
+function fetchMovies(pageNumber) {
+  fetch(`http://www.omdbapi.com/?apikey=92a2e38f&s=movie&y=${currentYear}&page=${pageNumber}`)
+    .then(response => response.json())
+    .then(movieData => {
+      if (movieData.Response === "True") {
+        const movies = movieData.Search;
+
+        const movieContainer = document.querySelector("#movie-container");
+
+        movies.forEach(movieData => {
+          const imdbID = movieData.imdbID;
+          fetch(`http://www.omdbapi.com/?apikey=92a2e38f&i=${imdbID}&plot=full`)
+            .then(response => response.json())
+            .then(movieData => {
+              // const posterUrl = movieData.Poster !== "N/A" ? movieData.Poster : "";
+              // const title = movieData.Title;
+              // const movieRated = movieData.Rated;
+              // const genre = movieData.Genre;
+
+              const movieContainer = document.createElement("div");
+              movieContainer.classList.add("#movie-container");
+
+              const posterUrl = movieData.Poster !== "N/A" ? movieData.Poster : defaultImage;
+              const moviePoster = document.createElement("img");
+              moviePoster.src = posterUrl;
+              moviePoster.alt = `Poster for ${movieData.Title}`;
+              movieContainer.appendChild(moviePoster);
+
+              const movieInfo = document.createElement("div");
+              movieInfo.classList.add("movie-info");
+
+              const title = document.createElement("h2");
+              title.innerText = movieData.Title;
+              movieInfo.appendChild(title);
+
+              const rated = document.createElement("p");
+              rated.innerText = `Rated: ${movieData.Rated}`;
+              movieInfo.appendChild(rated);
+
+              const genre = document.createElement("p");
+              genre.innerText = `Genre: ${movieData.Genre}`;
+              movieInfo.appendChild(genre);
+
+              movieContainer.appendChild(movieInfo);
+
+              document.querySelector("#movie-list").appendChild(movieContainer);
+
+              if (posterUrl === "N/A") {
+                document.querySelector('#movie-poster').src = defaultImage;
+              } else {
+                document.querySelector('#movie-poster').src = posterUrl;
+              }
+              document.querySelector('#movie-title').innerText = title;
+              document.querySelector('#movie-rated').innerText = movieRated;
+              document.querySelector('#movie-genre').innerText = genre;
+            });
+        });
+      }
+    });
+};
+
+document.querySelector('#next-button')
+  .addEventListener('click', function () {
+    currentPage++;
+    const movieList = document.querySelector('#movie-list');
+    movieList.innerHtml = "";
+    fetchMovies(currentPage);
+  });
+
 
 
 

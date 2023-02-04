@@ -77,40 +77,45 @@ let currentPage = 1;
 window.addEventListener('load', (event) => {
   fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=${currentPage}`)
     .then(response => response.json())
-    .then(newMovieData => {
-      const movieContainer = document.querySelector('#movie-container');
-      newMovieData.results.forEach(movie => {
-        const posterUrl = movie.poster_path !== "N/A" ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : "";
-        const title = movie.title;
-        const genres = movie.genres;
-        let genreNames = [];
-        if (genres) {
-          genres.forEach(genres => {
-            genreNames.push(genres.name);
+    .then(data => {
+      data.results.forEach(movie => {
+        movies = data.results;
+        const movieID = movie.id;
+
+        fetch(`https://api.themoviedb.org/3/movie/${movieID}?api_key=${apiKey}&language=en-US`)
+          .then(response => response.json())
+          .then(movieData => {
+            const movieContainer = document.querySelector('#movie-container')
+            const posterUrl = movieData.poster_path !== "N/A" ? `https://image.tmdb.org/t/p/w500${movieData.poster_path}` : "";
+            const title = movieData.title;
+            const genres = movieData.genres;
+            let genreNames = [];
+            genres.forEach(genres => {
+              genreNames.push(genres.name);
+            });
+            const movieList = document.createElement('div');
+            movieList.setAttribute('id', 'movie-list');
+
+            const moviePoster = document.createElement('img');
+            moviePoster.setAttribute('id', 'movie-poster');
+            moviePoster.setAttribute('src', posterUrl);
+            moviePoster.setAttribute('alt', title);
+
+            const movieTitle = document.createElement('h2');
+            movieTitle.setAttribute('id', 'movie-title');
+            movieTitle.innerText = title;
+
+            const movieGenre = document.createElement('p');
+            movieGenre.setAttribute('id', 'movie-genre');
+            movieGenre.innerText = `Genre: ${genreNames.join(', ')}`;
+
+            movieList.appendChild(moviePoster);
+            movieList.appendChild(movieTitle);
+            movieList.appendChild(movieGenre);
+
+            movieContainer.appendChild(movieList);
+
           });
-        }
-
-        const movieList = document.createElement('div');
-        movieList.setAttribute('id', 'movie-list');
-
-        const moviePoster = document.createElement('img');
-        moviePoster.setAttribute('id', 'movie-poster');
-        moviePoster.setAttribute('src', posterUrl);
-        moviePoster.setAttribute('alt', title);
-
-        const movieTitle = document.createElement('h2');
-        movieTitle.setAttribute('id', 'movie-title');
-        movieTitle.innerText = title;
-
-        const movieGenre = document.createElement('p');
-        movieGenre.setAttribute('id', 'movie-genre');
-        movieGenre.innerText = `Genre: ${genreNames.join(', ')}`;
-
-        movieList.appendChild(moviePoster);
-        movieList.appendChild(movieTitle);
-        movieList.appendChild(movieGenre);
-
-        movieContainer.appendChild(movieList);
       });
     });
 });
@@ -122,37 +127,3 @@ document.querySelector('#next-button')
     const movieList = document.querySelector('#movie-list');
     movieList.innerHtml = "";
   });
-
-
-
-
-// const movieContainer = document.querySelector("#movie-container");
-
-// searchForm.addEventListener('submit', event => {
-//   event.preventDefault();
-
-//   fetch(`http://www.omdbapi.com/?apikey=92a2e38f&s=${searchQuery}`)
-//   .then(response => response.json())
-//   .then(data => {
-//     const popularMovies = data.results;
-//     popularMovies.forEach(movie => {
-//       const movieElement = documnet.createElement("div");
-//       movieElement.classList.add("movie");
-
-//       const posterElement = document.createElement("img");
-//       posterElement.src = movie.poster_path;
-//       posterElement.alt = `Poster for ${movie.title}`;
-//       posterElement.addEventListener("click", () => {
-
-//       });
-
-//       const nameElement = document.createElement("p");
-//       nameElement.classList.add("movie-name");
-//       nameElement.textContent = movie.title;
-
-//       movieElement.appendChild(posterElement);
-//       movieElement.appendChild(nameElement);
-//       movieContainer.appendChild(movieElement);
-//     });
-//   });
-//   });

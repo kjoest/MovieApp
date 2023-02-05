@@ -25,7 +25,6 @@ searchForm.addEventListener('submit', event => {
             const releaseDate = movieData.release_date;
             const runtime = movieData.runtime;
             const genres = movieData.genres;
-            //const movieRated = movieData.certifications;
             const description = movieData.overview;
             const rating = movieData.vote_average;
             const posterUrl = movieData.poster_path !== "N/A" ? `https://image.tmdb.org/t/p/w500${movieData.poster_path}` : "";
@@ -61,10 +60,19 @@ searchForm.addEventListener('submit', event => {
             document.querySelector('#movie-release-date').innerText = `Released: ${releaseDate}`;
             document.querySelector('#movie-runtime').innerText = `Runtime: ${runtime}`;
             document.querySelector('#movie-genre').innerText = `Genre: ${genreNames.join(', ')}`;
-            //document.querySelector('#movie-rated').innerText = `Rated: ${movieRated}`
             document.querySelector('#movie-description').innerText = description;
             document.querySelector('#movie-rating').innerText = `Rating: ${rating}`;
             document.querySelector('#movie-poster').src = posterUrl;
+
+            const prevButton = document.getElementById("previous-button");
+            const nextButton = document.getElementById("next-button");
+            const lastPageButton = document.getElementById("last-page-button")
+            const firstPageButton = document.getElementById("first-page-button")
+
+            prevButton.style.display = "none";
+            nextButton.style.display = "none";
+            lastPageButton.style.display = "none";
+            firstPageButton.style.display = "none";
           });
       } else {
         console.error(data.Error);
@@ -73,11 +81,17 @@ searchForm.addEventListener('submit', event => {
 });
 
 let currentPage = 1;
+let movies = [];
 
 window.addEventListener('load', (event) => {
+  fetchMovies();
+});
+
+function fetchMovies() {
   fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=${currentPage}`)
     .then(response => response.json())
     .then(data => {
+      totalPages = data.total_pages;
       data.results.forEach(movie => {
         movies = data.results;
         const movieID = movie.id;
@@ -93,6 +107,7 @@ window.addEventListener('load', (event) => {
             genres.forEach(genres => {
               genreNames.push(genres.name);
             });
+
             const movieList = document.createElement('div');
             movieList.setAttribute('id', 'movie-list');
 
@@ -115,15 +130,70 @@ window.addEventListener('load', (event) => {
 
             movieContainer.appendChild(movieList);
 
-          });
+            const prevButton = document.getElementById("previous-button");
+            const nextButton = document.getElementById("next-button");
+            const lastPageButton = document.getElementById("last-page-button")
+            const firstPageButton = document.getElementById("first-page-button")
+
+            if (currentPage > totalPages) {
+              currentPage = totalPages;
+            }
+
+            if (currentPage === 1 && totalPages === 1) {
+              prevButton.style.display = "none";
+              nextButton.style.display = "none";
+              lastPageButton.style.display = "none";
+              firstPageButton.style.display = "none";
+            } else if (currentPage === 1) {
+              prevButton.style.display = "none";
+              firstPageButton .style.display = "none";
+              nextButton.style.display = "block";
+              lastPageButton.style.display = "block";
+            } else if (currentPage === totalPages) {
+              prevButton.style.display = "block";
+              firstPageButton.style.display = "block";
+              nextButton.style.display = "none";
+              lastPageButton.style.display = "none";
+            } else {
+              prevButton.style.display = "block";
+              nextButton.style.display = "block";
+              firstPageButton.style.display = "block";
+              lastPageButton.style.display = "block";
+            }
+          })
       });
     });
-});
+}
 
+document.querySelector('#previous-button')
+  .addEventListener('click', function () {
+    if (currentPage > 1) {
+      currentPage -= 1;
+      const movieContainer = document.querySelector('#movie-container');
+      movieContainer.innerHTML = "";
+      fetchMovies();
+    }
+  });
 
 document.querySelector('#next-button')
   .addEventListener('click', function () {
-    currentPage++;
-    const movieList = document.querySelector('#movie-list');
-    movieList.innerHtml = "";
+    currentPage += 1;
+    const movieContainer = document.querySelector('#movie-container');
+    movieContainer.innerHTML = "";
+    fetchMovies();
+  });
+
+document.querySelector('#first-page-button').addEventListener('click', function () {
+  currentPage = 1;
+  const movieContainer = document.querySelector('#movie-container');
+  movieContainer.innerHTML = "";
+  fetchMovies();
+});
+
+document.querySelector('#last-page-button')
+  .addEventListener('click', function () {
+    currentPage = totalPages;
+    const movieContainer = document.querySelector('#movie-container');
+    movieContainer.innerHTML = "";
+    fetchMovies();
   });

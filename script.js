@@ -100,7 +100,7 @@ function fetchMovies() {
           .then(response => response.json())
           .then(movieData => {
             const movieContainer = document.querySelector('.movie-container');
-            const posterUrl = movieData.poster_path !== "" ? `https://image.tmdb.org/t/p/w500${movieData.poster_path}` : "";
+            const posterUrl = movieData.poster_path !== `${defaultImage}` ? `https://image.tmdb.org/t/p/w500${movieData.poster_path}` : "";
             const title = movieData.title;
             const genres = movieData.genres;
             let genreNames = [];
@@ -123,7 +123,6 @@ function fetchMovies() {
 
             const movieGenre = document.createElement('p');
             movieGenre.classList.add('movie-genre');
-
             movieGenre.innerText = `Genre: ${genreNames.join(', ')}`;
 
             movieList.appendChild(moviePoster);

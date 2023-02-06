@@ -9,6 +9,10 @@ html {
     font-size: 62.5%;
 }
 
+#empty-element {
+    display: none;
+}
+
 /* Search for a Movie Info */
 
 /* .movie-container {

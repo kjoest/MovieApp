@@ -1,8 +1,8 @@
 //http://www.omdbapi.com/?apikey=92a2e38f&s=${searchQuery} -- ApiKey/Link for Omdb
 const apiKey = "fb495745fa6d1d5a8b12ee2b026cbe06"
 const defaultImage = "https://via.placeholder.com/300x450"
-const searchForm = document.querySelector('#search-form');
-const input = document.querySelector('#search-input');
+const searchForm = document.querySelector('.search-form');
+const input = document.querySelector('.search-input');
 
 searchForm.addEventListener('submit', event => {
   event.preventDefault();
@@ -19,7 +19,7 @@ searchForm.addEventListener('submit', event => {
         fetch(`https://api.themoviedb.org/3/movie/${movieID}?api_key=${apiKey}&language=en-US`)
           .then(response => response.json())
           .then(movieData => {
-            const movieContainer = document.querySelector('#movie-container');
+            const movieContainer = document.querySelector('.movie-container');
             movieContainer.innerHTML = "";
             const title = movieData.title;
             const releaseDate = movieData.release_date;
@@ -52,17 +52,17 @@ searchForm.addEventListener('submit', event => {
                   cast = creditsData.cast.map(actor => actor.name).join(', ');
                 }
 
-                document.querySelector('#movie-cast').innerText = `Starring: ${cast}`;
-                document.querySelector('#movie-director').innerText = `Director: ${director}`;
+                document.querySelector('.movie-cast').innerText = `Starring: ${cast}`;
+                document.querySelector('.movie-director').innerText = `Director: ${director}`;
               });
 
-            document.querySelector('#movie-title').innerText = title;
-            document.querySelector('#movie-release-date').innerText = `Released: ${releaseDate}`;
-            document.querySelector('#movie-runtime').innerText = `Runtime: ${runtime}`;
-            document.querySelector('#movie-genre').innerText = `Genre: ${genreNames.join(', ')}`;
-            document.querySelector('#movie-description').innerText = description;
-            document.querySelector('#movie-rating').innerText = `Rating: ${rating}`;
-            document.querySelector('#movie-poster').src = posterUrl;
+            document.querySelector('.movie-title').innerText = title;
+            document.querySelector('.movie-release-date').innerText = `Released: ${releaseDate}`;
+            document.querySelector('.movie-runtime').innerText = `Runtime: ${runtime}`;
+            document.querySelector('.movie-genre').innerText = `Genre: ${genreNames.join(', ')}`;
+            document.querySelector('.movie-description').innerText = description;
+            document.querySelector('.movie-rating').innerText = `Rating: ${rating}`;
+            document.querySelector('.movie-poster').src = posterUrl;
 
             const prevButton = document.getElementById("previous-button");
             const nextButton = document.getElementById("next-button");
@@ -99,8 +99,8 @@ function fetchMovies() {
         fetch(`https://api.themoviedb.org/3/movie/${movieID}?api_key=${apiKey}&language=en-US`)
           .then(response => response.json())
           .then(movieData => {
-            const movieContainer = document.querySelector('#movie-container')
-            const posterUrl = movieData.poster_path !== "N/A" ? `https://image.tmdb.org/t/p/w500${movieData.poster_path}` : "";
+            const movieContainer = document.querySelector('.movie-container');
+            const posterUrl = movieData.poster_path !== "" ? `https://image.tmdb.org/t/p/w500${movieData.poster_path}` : "";
             const title = movieData.title;
             const genres = movieData.genres;
             let genreNames = [];
@@ -110,18 +110,20 @@ function fetchMovies() {
 
             const movieList = document.createElement('div');
             movieList.setAttribute('id', 'movie-list');
+            movieList.classList.add('movie-list');
 
             const moviePoster = document.createElement('img');
-            moviePoster.setAttribute('id', 'movie-poster');
+            moviePoster.classList.add('movie-poster');
             moviePoster.setAttribute('src', posterUrl);
             moviePoster.setAttribute('alt', title);
 
             const movieTitle = document.createElement('h2');
-            movieTitle.setAttribute('id', 'movie-title');
+            movieTitle.classList.add('movie-title');
             movieTitle.innerText = title;
 
             const movieGenre = document.createElement('p');
-            movieGenre.setAttribute('id', 'movie-genre');
+            movieGenre.classList.add('movie-genre');
+
             movieGenre.innerText = `Genre: ${genreNames.join(', ')}`;
 
             movieList.appendChild(moviePoster);
@@ -146,7 +148,7 @@ function fetchMovies() {
               firstPageButton.style.display = "none";
             } else if (currentPage === 1) {
               prevButton.style.display = "none";
-              firstPageButton .style.display = "none";
+              firstPageButton.style.display = "none";
               nextButton.style.display = "block";
               lastPageButton.style.display = "block";
             } else if (currentPage === totalPages) {
@@ -169,7 +171,7 @@ document.querySelector('#previous-button')
   .addEventListener('click', function () {
     if (currentPage > 1) {
       currentPage -= 1;
-      const movieContainer = document.querySelector('#movie-container');
+      const movieContainer = document.querySelector('.movie-container');
       movieContainer.innerHTML = "";
       fetchMovies();
     }
@@ -178,22 +180,23 @@ document.querySelector('#previous-button')
 document.querySelector('#next-button')
   .addEventListener('click', function () {
     currentPage += 1;
-    const movieContainer = document.querySelector('#movie-container');
+    const movieContainer = document.querySelector('.movie-container');
     movieContainer.innerHTML = "";
     fetchMovies();
   });
 
-document.querySelector('#first-page-button').addEventListener('click', function () {
-  currentPage = 1;
-  const movieContainer = document.querySelector('#movie-container');
-  movieContainer.innerHTML = "";
-  fetchMovies();
-});
+document.querySelector('#first-page-button')
+  .addEventListener('click', function () {
+    currentPage = 1;
+    const movieContainer = document.querySelector('.movie-container');
+    movieContainer.innerHTML = "";
+    fetchMovies();
+  });
 
 document.querySelector('#last-page-button')
   .addEventListener('click', function () {
     currentPage = totalPages;
-    const movieContainer = document.querySelector('#movie-container');
+    const movieContainer = document.querySelector('.movie-container');
     movieContainer.innerHTML = "";
     fetchMovies();
   });

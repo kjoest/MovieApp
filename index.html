@@ -8,9 +8,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
     integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="style.css">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@300;400;600;700&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
@@ -21,34 +27,36 @@
   <main>
     <nav class="nav-bar">
       <i class fa-solid fa-film></i>
-      <form id="search-form">
-        <input type="text" id="search-input" name="search-input" placeholder="Search for a Movie">
+      <form class="search-form">
+        <input type="text" class="search-input" name="search-input" placeholder="Search for a Movie">
         <button type="submit" id="search-button">Search</button>
       </form>
     </nav>
 
     <!-- Front Page -->
 
-    <div id="movie-container">
-      <div id="movie-list">
-        <img id="movie-poster" src="" alt="">
-        <h2 id="movie-title"></h2>
-        <p id="movie-genre"></p>
+    <div class="movie-container">
+      <div class="movie-list">
+        <img class="movie-poster" src="" alt="">
+        <h2 class="movie-title"></h2>
+        <p class="movie-genre"></p>
       </div>
     </div>
 
     <!-- Info when you search for a movie -->
 
-    <section id="movie-info">
-      <h2 id="movie-title"></h2>
-      <p id="movie-release-date"></p>
-      <p id="movie-runtime"></p>
-      <p id="movie-genre"></p>
-      <p id="movie-director"></p>
-      <p id="movie-cast"></p>
-      <p id="movie-description"></p>
-      <p id="movie-rating"></p>
-      <img id="movie-poster" src="" alt="">
+    <section class="movie-info">
+      <div>
+        <h2 class="movie-title"></h2>
+        <p class="movie-release-date"></p>
+        <p class="movie-runtime"></p>
+        <p class="movie-genre"></p>
+        <p class="movie-director"></p>
+        <p class="movie-cast"></p>
+        <p class="movie-description"></p>
+        <p class="movie-rating"></p>
+        <img class="movie-poster" src="" alt="">
+      </div>
     </section>
 
     <!-- Arrow Icons -->

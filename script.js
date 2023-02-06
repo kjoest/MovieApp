@@ -2,7 +2,7 @@
 const apiKey = "fb495745fa6d1d5a8b12ee2b026cbe06"
 const defaultImage = "https://via.placeholder.com/300x450"
 const searchForm = document.querySelector('.search-form');
-const input = document.querySelector('.search-input');
+const input = document.querySelector('.search-bar');
 
 searchForm.addEventListener('submit', event => {
   event.preventDefault();
@@ -19,8 +19,7 @@ searchForm.addEventListener('submit', event => {
         fetch(`https://api.themoviedb.org/3/movie/${movieID}?api_key=${apiKey}&language=en-US`)
           .then(response => response.json())
           .then(movieData => {
-            const movieContainer = document.querySelector('.movie-container');
-            movieContainer.innerHTML = "";
+            document.querySelector('.movie-container').style.display = "none";
             const title = movieData.title;
             const releaseDate = movieData.release_date;
             const runtime = movieData.runtime;
@@ -52,17 +51,67 @@ searchForm.addEventListener('submit', event => {
                   cast = creditsData.cast.map(actor => actor.name).join(', ');
                 }
 
-                document.querySelector('.movie-cast').innerText = `Starring: ${cast}`;
-                document.querySelector('.movie-director').innerText = `Director: ${director}`;
+                // document.querySelector('.movie-cast').innerText = `Starring: ${cast}`;
+                // document.querySelector('.movie-director').innerText = `Director: ${director}`;
+
+                const movieCast = document.createElement('p');
+                movieCast.classList.add('movie-cast');
+                movieCast.innerText = `Starring: ${cast}`;
+
+                const movieDirector = document.createElement('p');
+                movieDirector.classList.add('movie-director');
+                movieDirector.innerText = `Director: ${director}`;
+
+                movieContainer.appendChild(movieCast);
+                movieContainer.appendChild(movieDirector);
               });
 
-            document.querySelector('.movie-title').innerText = title;
-            document.querySelector('.movie-release-date').innerText = `Released: ${releaseDate}`;
-            document.querySelector('.movie-runtime').innerText = `Runtime: ${runtime}`;
-            document.querySelector('.movie-genre').innerText = `Genre: ${genreNames.join(', ')}`;
-            document.querySelector('.movie-description').innerText = description;
-            document.querySelector('.movie-rating').innerText = `Rating: ${rating}`;
-            document.querySelector('.movie-poster').src = posterUrl;
+            // document.querySelector('.movie-title').innerText = title;
+            // document.querySelector('.movie-release-date').innerText = `Released: ${releaseDate}`;
+            // document.querySelector('.movie-runtime').innerText = `Runtime: ${runtime}`;
+            // document.querySelector('.movie-genre').innerText = `Genre: ${genreNames.join(', ')}`;
+            // document.querySelector('.movie-description').innerText = description;
+            // document.querySelector('.movie-rating').innerText = `Rating: ${rating}`;
+            // document.querySelector('.movie-poster').src = posterUrl;
+
+            const movieTitle = document.createElement('h2');
+            movieTitle.classList.add('movie-title');
+            movieTitle.innerText = title;
+
+            const movieReleaseDate = document.createElement('p');
+            movieReleaseDate.classList.add('movie-release-date');
+            movieReleaseDate.innerText = `Released: ${releaseDate}`;
+
+            const movieRuntime = document.createElement('p');
+            movieRuntime.classList.add('movie-runtime');
+            movieRuntime.innerText = `Runtime: ${runtime}`;
+
+            const movieGenre = document.createElement('p');
+            movieGenre.classList.add('movie-genre');
+            movieGenre.innerText = `Genre: ${genreNames.join(', ')}`;
+
+            const movieDescription = document.createElement('p');
+            movieDescription.classList.add('movie-description');
+            movieDescription.innerText = description;
+
+            const movieRating = document.createElement('p');
+            movieRating.classList.add('movie-rating');
+            movieRating.innerText = `Rating: ${rating}`;
+
+            const moviePoster = document.createElement('img');
+            moviePoster.classList.add('movie-poster');
+            moviePoster.src = posterUrl;
+
+            // Add the elements to the page
+            const movieContainer = document.querySelector('.movie-container-info');
+            movieContainer.innerHTML = "";
+            movieContainer.appendChild(movieTitle);
+            movieContainer.appendChild(movieReleaseDate);
+            movieContainer.appendChild(movieRuntime);
+            movieContainer.appendChild(movieGenre);
+            movieContainer.appendChild(movieDescription);
+            movieContainer.appendChild(movieRating);
+            movieContainer.appendChild(moviePoster);
 
             const prevButton = document.getElementById("previous-button");
             const nextButton = document.getElementById("next-button");
@@ -91,6 +140,7 @@ function fetchMovies() {
   fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=${currentPage}`)
     .then(response => response.json())
     .then(data => {
+      document.querySelector('.movie-container').style.display = 'block';
       totalPages = data.total_pages;
       data.results.forEach(movie => {
         movies = data.results;
@@ -99,6 +149,7 @@ function fetchMovies() {
         fetch(`https://api.themoviedb.org/3/movie/${movieID}?api_key=${apiKey}&language=en-US`)
           .then(response => response.json())
           .then(movieData => {
+
             const movieContainer = document.querySelector('.movie-container');
             const posterUrl = movieData.poster_path !== `${defaultImage}` ? `https://image.tmdb.org/t/p/w500${movieData.poster_path}` : "";
             const title = movieData.title;
@@ -109,7 +160,7 @@ function fetchMovies() {
             });
 
             const movieList = document.createElement('div');
-            movieList.setAttribute('id', 'movie-list');
+            //movieList.setAttribute('id', 'movie-list');
             movieList.classList.add('movie-list');
 
             const moviePoster = document.createElement('img');

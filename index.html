@@ -20,21 +20,18 @@
 </head>
 
 <body>
-  <header>
-    <h1 class="movie-app-header">Movie App</h1>
-  </header>
-
   <main>
     <nav class="nav-bar">
       <i class fa-solid fa-film></i>
+      <h1 class="movie-app-header">Movie Map</h1>
       <form class="search-form">
-        <input type="text" class="search-input" name="search-input" placeholder="Search for a Movie">
+        <input type="text" class="search-bar" name="search-input" placeholder="Search for a Movie">
         <button type="submit" id="search-button">Search</button>
       </form>
     </nav>
 
     <!-- Front Page -->
-    
+
     <div class="movie-container">
       <div class="movie-list" id="empty-element">
         <img class="movie-poster" src="" alt="">
@@ -45,8 +42,9 @@
 
     <!-- Info when you search for a movie -->
 
-    <section class="movie-info">
-      <div id="empty-element">
+    <div class="movie-container-info">
+      <div class="movie-list-info" id="empty-element">
+        <img class="movie-poster" src="" alt="">
         <h2 class="movie-title"></h2>
         <p class="movie-release-date"></p>
         <p class="movie-runtime"></p>
@@ -55,9 +53,8 @@
         <p class="movie-cast"></p>
         <p class="movie-description"></p>
         <p class="movie-rating"></p>
-        <img class="movie-poster" src="" alt="">
       </div>
-    </section>
+    </div>
 
     <!-- Arrow Icons -->
 

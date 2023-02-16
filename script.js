@@ -60,7 +60,7 @@ function fetchMovies() {
 
             const movieGenre = document.createElement('p');
             movieGenre.classList.add('movie-genre');
-            movieGenre.innerText = `Genre: ${genreNames.join(', ')}`;
+            movieGenre.innerText = `${genreNames.join(', ')}`;
 
             movieList.appendChild(movieId);
             movieList.appendChild(moviePoster);
@@ -111,7 +111,7 @@ input.addEventListener('input', event => {
   fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchQuery}&language=en-US`)
     .then(response => response.json())
     .then(data => {
-      document.querySelector('.movie-container-info').innerHTML = "";
+      document.querySelector('.movie-container-info').innerHTML = "flex";
       document.querySelector('.movie-container').innerHTML = "";
       if (data.results.length > 0) {
         const movies = data.results;
@@ -149,7 +149,7 @@ input.addEventListener('input', event => {
 
               const movieGenre = document.createElement('p');
               movieGenre.classList.add('movie-genre');
-              movieGenre.innerText = `Genre: ${genreNames.join(', ')}`;
+              movieGenre.innerText = `${genreNames.join(', ')}`;
 
               movieList.appendChild(movieId);
               movieList.appendChild(moviePoster);
@@ -199,7 +199,7 @@ movieContainers.forEach(movie => {
         console.log(movie);
         selectedMovie = movie;
         const id = selectedMovie.id;
-        const posterUrl = selectedMovie.poster_path !== "N/A" ? `https://image.tmdb.org/t/p/w500${selectedMovie.poster_path}` : "";
+        const posterUrl = selectedMovie.poster_path ? imageUrl + `${selectedMovie.poster_path}` : `${defaultImage}`;
         const title = selectedMovie.title;
         const rating = selectedMovie.vote_average;
         const description = selectedMovie.overview;

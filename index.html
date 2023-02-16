@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Movie App</title>
+  <title>Movie Map</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -32,7 +32,7 @@
     <!-- Front Page -->
 
     <div class="movie-container">
-      <div class="movie-list" id="empty-element">
+      <div class="movie-list">
         <div class="movie-id"></div>
         <img class="movie-poster" src="" alt="">
         <h2 class="movie-title"></h2>
@@ -45,15 +45,19 @@
     <div class="movie-container-info">
       <div class="movie-list-info" id="empty-element">
         <div class="movie-id-info"></div>
-        <img class="movie-poster-info" src="" alt="">
-        <h2 class="movie-title-info"></h2>
-        <p class="movie-rating-info"></p>
-        <p class="movie-description-info"></p>
-        <p class="movie-genre-info"></p>
-        <p class="movie-release-date-info"></p>
-        <p class="movie-runtime-info"></p>
-        <p class="movie-director-info"></p>
-        <p class="movie-cast-info"></p>
+        <img class="movie-poster-info" src="" alt="" data-movie-id="1234">
+        <div class="movie-information">
+          <h2 class="movie-title-info"></h2>
+          <p class="movie-rating-info"></p>
+          <p class="movie-description-info"></p>
+          <p class="movie-genre-info"></p>
+          <p class="movie-release-date-info"></p>
+          <p class="movie-runtime-info"></p>
+        </div>
+        <div class="crew-information">
+          <p class="movie-director-info"></p>
+          <p class="movie-cast-info"></p>
+        </div>
       </div>
     </div>
 

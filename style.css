@@ -30,9 +30,17 @@ html {
     margin-top: 0;
 }
 
+.nav-bar i {
+  font-size: 5rem;
+  margin-right: 2rem;
+  color: black;
+}
+
  .movie-app-header {
     margin: 0;
+    display: flex;
     font-size: 5rem;
+    color: black;
 }
 
 .search-form {
@@ -43,7 +51,7 @@ html {
 }
 
 .search-bar {
-    border-radius: 1rem;
+    border-radius: .50rem;
 }
 
 /* New Movie Info */

@@ -183,7 +183,7 @@ movieContainers.forEach(movie => {
     event.preventDefault();
 
     document.querySelector('.search-bar').value = '';
-    document.querySelector('.movie-container-info').style.display = "block";
+    document.querySelector('.movie-container-info').style.display = "grid";
 
     const target = event.target;
     const movieID = target.dataset.movieId;

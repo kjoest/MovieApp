@@ -122,7 +122,7 @@
 
 .icons button {
   margin: 0 10px;
-  font-size: 2rem;
+  font-size: 1.5rem;
   width: 5rem;
 }
 
@@ -141,13 +141,26 @@
   margin-top: 10rem;
 }
 
-.movie-id-info {
-  font-size: 14px;
+.movie-poster-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .movie-poster-info {
   height: 300px;
   width: 200px;
+}
+
+.crew-information {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.movie-information {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
 }
 
 .movie-title-info {
@@ -161,27 +174,97 @@
 
 .movie-description-info {
   font-size: 16px;
+  margin-top: 20px;
 }
 
-.movie-genre-info {
-  font-size: 16px;
-}
-
-.movie-release-date-info {
-  font-size: 16px;
-}
-
+.movie-genre-info,
+.movie-release-date-info,
 .movie-runtime-info {
   font-size: 16px;
+  margin-top: 10px;
 }
 
-.crew-information {
-  border: 1px solid #ccc;
-  padding: 10px;
-}
-
-.movie-director-info,
 .movie-cast-info {
-  font-size: italic;
+  font-style: italic;
   font-size: 16px;
+  margin-top: 20px;
+}
+
+/* Media Query */
+
+@media(max-width: 1300px) {
+  .nav-bar {
+    padding-left: 2rem;
+  }
+
+  .search-form {
+    margin-left: 2rem;
+  }
+
+  .search-bar {
+    width: 40rem;
+  }
+
+  .movie-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .icons button {
+    font-size: 1.2rem;
+  }
+}
+
+@media(max-width: 1000px) {
+  .nav-bar {
+    padding-left: 6rem;
+  }
+
+  .search-form {
+    margin-left: 2rem;
+  }
+
+  .search-bar {
+    width: 30rem;
+    font-size: 1rem;
+  }
+
+  .movie-app-header {
+    font-size: 1.3rem;
+  }
+
+  .nav-bar i {
+    font-size: 1.5rem;
+    margin-right: .5rem;
+  }
+
+  .movie-container {
+    grid-template-columns: repeat(2, 1fr);
+    margin-left: 5rem;
+  }
+}
+
+@media(max-width: 436px) {
+  .nav-bar {
+    padding-left: 2rem;
+  }
+
+  .search-bar {
+    width: 12rem;
+    font-size: 1rem;
+  }
+
+
+  .movie-app-header {
+    display: none;
+  }
+
+  .nav-bar i {
+    margin-left: 2rem;
+  }
+
+  .movie-container {
+    grid-template-columns: repeat(1, 1fr);
+    margin-left: 2rem;
+    margin-top: 9rem;
+  }
 }

@@ -243,7 +243,7 @@
   }
 }
 
-@media(max-width: 436px) {
+@media(max-width: 320px) {
   .nav-bar {
     padding-left: 2rem;
   }
@@ -265,7 +265,7 @@
 
   .movie-container {
     grid-template-columns: repeat(1, 1fr);
-    margin-left: 2rem;
+    margin-left: 3rem;
     margin-top: 9rem;
   }
 }

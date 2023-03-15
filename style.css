@@ -44,10 +44,11 @@
   margin-left: 5rem;
   font-size: 1.5rem;
   border-radius: 2rem;
+  margin-right: 15rem;
 }
 
 .search-bar {
-  width: 50rem;
+  width: 60rem;
   border-radius: .50rem;
 }
 
@@ -63,7 +64,7 @@ select {
   background-size: 100% 2px;
   background-position: 0 100%;
   background-repeat: no-repeat;
-  float: right;
+
 }
 
 select option {
@@ -205,6 +206,11 @@ select option:last-of-type {
   margin-top: 20px;
 }
 
+.carousel {
+  width: 800px;
+  margin-bottom: 5rem;
+}
+
 /* Media Query */
 
 @media(max-width: 1300px) {
@@ -221,7 +227,7 @@ select option:last-of-type {
   }
 
   .movie-container {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .icons button {

@@ -287,6 +287,57 @@ movieContainers.forEach(movie => {
         movieContainer.appendChild(movieReleaseDate);
         movieContainer.appendChild(movieRuntime);
 
+        // const carouselContainer = document.createElement('div');
+        // carouselContainer.setAttribute('id', 'carouselExampleControls');
+        // carouselContainer.classList.add('carousel', 'slide');
+        // document.body.appendChild(carouselContainer);
+
+        // const carouselInner = document.createElement('div');
+        // carouselInner.classList.add('carousel-inner');
+        // carouselContainer.appendChild(carouselInner);
+
+        // const firstCarouselItem = document.createElement('div');
+        // firstCarouselItem.classList.add('carousel-item', 'active');
+        // carouselInner.appendChild(firstCarouselItem);
+
+        // const carouselImage = document.createElement('img');
+        // carouselImage.classList.add('d-block', 'w-100');
+        // carouselImage.setAttribute('src', '...');
+        // carouselImage.setAttribute('alt', 'First Slide');
+        // firstCarouselItem.appendChild(carouselImage);
+
+        // const prevCarouselControl = documnet.createElement('a');
+        // prevCarouselControl.classList.add('carousel-control-prev');
+        // prevCarouselControl.setAttribute('href', '#carouselExampleControls');
+        // prevCarouselControl.setAttribute('role', 'button');
+        // prevCarouselControl.setAttribute('data-slide', 'prev');
+        // carouselContainer.appendChild(prevCarouselControl);
+
+        // const prevCarouselControlIcon = document.createElement('span');
+        // prevCarouselControlIcon.classList.add('carousel-control-prev-icon');
+        // prevCarouselControl.appendChild(prevCarouselControlIcon);
+
+        // const prevCarouselControlText = document.createElement('span');
+        // prevCarouselControlText.classList.add('sr-only');
+        // prevCarouselControlText.textContent = 'Previous';
+        // prevCarouselControl.appendChild(prevCarouselControlText);
+
+        // const nextCarouselControl = document.createElement('a');
+        // nextCarouselControl.classList.add('carousel-control-next');
+        // nextCarouselControl.setAttribute('href', '#carouselExampleControls');
+        // nextCarouselControl.setAttribute('role', 'button');
+        // nextCarouselControl.setAttribute('data-slide', 'next');
+        // carouselContainer.appendChild(nextCarouselControl);
+
+        // const nextCarouselControlIcon = document.createElement('span');
+        // nextCarouselControlIcon.classList.add('carousel-control-next-icon');
+        // nextCarouselControl.appendChild(nextCarouselControlIcon);
+
+        // const nextCarouselControlText = document.createElement('span');
+        // nextCarouselControlText.classList.add('sr-only');
+        // nextCarouselControlText.textContent = 'Next';
+        // nextCarouselControl.appendChild(nextCarouselControlText);
+
         const prevButton = document.getElementById("previous-button");
         const nextButton = document.getElementById("next-button");
         const lastPageButton = document.getElementById("last-page-button")
@@ -296,6 +347,68 @@ movieContainers.forEach(movie => {
         nextButton.style.display = "none";
         lastPageButton.style.display = "none";
         firstPageButton.style.display = "none";
+
+        const carouselContainer = document.createElement('div');
+        carouselContainer.setAttribute('id', 'carouselExampleControls');
+        carouselContainer.classList.add('carousel', 'slide');
+        document.body.appendChild(carouselContainer);
+
+        const carouselInner = document.createElement('div');
+        carouselInner.classList.add('carousel-inner');
+        carouselContainer.appendChild(carouselInner);
+
+        const firstCarouselItem = document.createElement('div');
+        firstCarouselItem.classList.add('carousel-item', 'active');
+        carouselInner.appendChild(firstCarouselItem);
+
+        const carouselImage = document.createElement('img');
+        carouselImage.classList.add('d-block', 'w-100', 'carousel-image');
+        carouselImage.setAttribute('src', 'https://via.placeholder.com/800x400.png?text=First+Slide');
+        carouselImage.setAttribute('alt', 'First Slide');
+        firstCarouselItem.appendChild(carouselImage);
+
+        const secondCarouselItem = document.createElement('div');
+        secondCarouselItem.classList.add('carousel-item');
+        carouselInner.appendChild(secondCarouselItem);
+
+        const secondCarouselImage = document.createElement('img');
+        secondCarouselImage.classList.add('d-block', 'w-100');
+        secondCarouselImage.setAttribute('src', 'https://via.placeholder.com/800x400.png?text=Second+Slide');
+        secondCarouselImage.setAttribute('alt', 'Second slide');
+        secondCarouselItem.appendChild(secondCarouselImage);
+
+
+        const prevCarouselControl = document.createElement('a');
+        prevCarouselControl.classList.add('carousel-control-prev');
+        prevCarouselControl.setAttribute('href', '#carouselExampleControls');
+        prevCarouselControl.setAttribute('role', 'button');
+        prevCarouselControl.setAttribute('data-slide', 'prev');
+        carouselContainer.appendChild(prevCarouselControl);
+
+        const prevCarouselControlIcon = document.createElement('span');
+        prevCarouselControlIcon.classList.add('carousel-control-prev-icon');
+        prevCarouselControl.appendChild(prevCarouselControlIcon);
+
+        const prevCarouselControlText = document.createElement('span');
+        prevCarouselControlText.classList.add('sr-only');
+        prevCarouselControlText.textContent = 'Previous';
+        prevCarouselControl.appendChild(prevCarouselControlText);
+
+        const nextCarouselControl = document.createElement('a');
+        nextCarouselControl.classList.add('carousel-control-next');
+        nextCarouselControl.setAttribute('href', '#carouselExampleControls');
+        nextCarouselControl.setAttribute('role', 'button');
+        nextCarouselControl.setAttribute('data-slide', 'next');
+        carouselContainer.appendChild(nextCarouselControl);
+
+        const nextCarouselControlIcon = document.createElement('span');
+        nextCarouselControlIcon.classList.add('carousel-control-next-icon');
+        nextCarouselControl.appendChild(nextCarouselControlIcon);
+
+        const nextCarouselControlText = document.createElement('span');
+        nextCarouselControlText.classList.add('sr-only');
+        nextCarouselControlText.textContent = 'Next';
+        nextCarouselControl.appendChild(nextCarouselControlText);
       });
   });
 });
